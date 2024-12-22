@@ -31,21 +31,25 @@ class CubeState {
 
   // Rotate top face to the left, modify if necessary
   void rotateTop() {
-    // Store the top row of each face
+    // Rotate the top face
+    List<Color> tempTop = [...faces[4]];
+    faces[4] = [tempTop[2], tempTop[0], tempTop[3], tempTop[1]];
+
+    // Update the top row of adjacent faces
+    List<Color> topRowBack = [faces[3][0], faces[3][1]];
+    List<Color> topRowRight = [faces[2][0], faces[2][1]];
     List<Color> topRowFront = [faces[0][0], faces[0][1]];
     List<Color> topRowLeft = [faces[1][0], faces[1][1]];
-    List<Color> topRowRight = [faces[2][0], faces[2][1]];
-    List<Color> topRowBack = [faces[3][0], faces[3][1]];
 
-    // Rotate top face
-    List<Color> tempTop = [...faces[4]];
-    faces[4] = [tempTop[2], tempTop[3], tempTop[0], tempTop[1]];
-
-    // Update adjacent faces
-    faces[0] = [faces[3][2], faces[3][3], ...faces[0].sublist(2)];
-    faces[1] = [faces[0][2], faces[0][3], ...faces[1].sublist(2)];
-    faces[2] = [faces[1][2], faces[1][3], ...faces[2].sublist(2)];
-    faces[3] = [faces[2][2], faces[2][3], ...faces[3].sublist(2)];
+    // Perform the row swaps in clockwise order
+    faces[0][0] = topRowLeft[0];
+    faces[0][1] = topRowLeft[1];
+    faces[1][0] = topRowBack[0];
+    faces[1][1] = topRowBack[1];
+    faces[2][0] = topRowFront[0];
+    faces[2][1] = topRowFront[1];
+    faces[3][0] = topRowRight[0];
+    faces[3][1] = topRowRight[1];
   }
 
   // Rotate top face to the left, modify if necessary
