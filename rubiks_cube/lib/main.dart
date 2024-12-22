@@ -1,3 +1,5 @@
+//2x2 Rubiks cube app
+
 import 'package:flutter/material.dart';
 
 void main() {
