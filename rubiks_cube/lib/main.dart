@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class CubeState {
 }
 
 class CubeScreen extends StatefulWidget {
-  const CubeScreen({Key? key}) : super(key: key);
+  const CubeScreen({super.key});
 
   @override
   _CubeScreenState createState() => _CubeScreenState();
@@ -152,6 +152,6 @@ class _CubeScreenState extends State<CubeScreen> {
           ],
         ),
       ),
-    );
+    )
   }
 }
