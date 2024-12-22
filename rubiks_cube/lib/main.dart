@@ -81,8 +81,54 @@ class CubeState {
   }
 
   // Rotate top face to the left, modify if necessary
-  void rotateBottom() {
-    //Need to implement your code here
+  void rotateBottomClockwise() {
+    // Rotate the bottom face
+    List<Color> tempBottom = [...faces[5]];
+    faces[5] = [tempBottom[2], tempBottom[0], tempBottom[3], tempBottom[1]];
+
+    // Update the bottom row of adjacent faces
+    List<Color> bottomRowFront = [faces[0][2], faces[0][3]];
+    List<Color> bottomRowRight = [faces[2][2], faces[2][3]];
+    List<Color> bottomRowBack = [faces[3][2], faces[3][3]];
+    List<Color> bottomRowLeft = [faces[1][2], faces[1][3]];
+
+    // Perform the row swaps in clockwise order
+    faces[0][2] = bottomRowLeft[0];
+    faces[0][3] = bottomRowLeft[1];
+
+    faces[1][2] = bottomRowBack[0];
+    faces[1][3] = bottomRowBack[1];
+
+    faces[2][2] = bottomRowFront[0];
+    faces[2][3] = bottomRowFront[1];
+
+    faces[3][2] = bottomRowRight[0];
+    faces[3][3] = bottomRowRight[1];
+  }
+
+  void rotateBottomCounterClockwise() {
+    // Rotate the bottom face
+    List<Color> tempBottom = [...faces[5]];
+    faces[5] = [tempBottom[2], tempBottom[0], tempBottom[3], tempBottom[1]];
+
+    // Update the bottom row of adjacent faces
+    List<Color> bottomRowFront = [faces[0][2], faces[0][3]];
+    List<Color> bottomRowRight = [faces[2][2], faces[2][3]];
+    List<Color> bottomRowBack = [faces[3][2], faces[3][3]];
+    List<Color> bottomRowLeft = [faces[1][2], faces[1][3]];
+
+    // Perform the row swaps in clockwise order
+    faces[0][2] = bottomRowRight[0];
+    faces[0][3] = bottomRowRight[1];
+
+    faces[1][2] = bottomRowFront[0];
+    faces[1][3] = bottomRowFront[1];
+
+    faces[2][2] = bottomRowBack[0];
+    faces[2][3] = bottomRowBack[1];
+
+    faces[3][2] = bottomRowLeft[0];
+    faces[3][3] = bottomRowLeft[1];
   }
 }
 
@@ -105,6 +151,18 @@ class _CubeScreenState extends State<CubeScreen> {
   void rotateTopCounterClockwise() {
     setState(() {
       cube.rotateTopCounterClockwise();
+    });
+  }
+
+  void rotateBottomClockwise() {
+    setState(() {
+      cube.rotateBottomClockwise();
+    });
+  }
+
+  void rotateBottomCounterClockwise() {
+    setState(() {
+      cube.rotateBottomCounterClockwise();
     });
   }
 
@@ -134,7 +192,7 @@ class _CubeScreenState extends State<CubeScreen> {
       backgroundColor: Colors.blueGrey,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             // Top face
             Column(
@@ -214,12 +272,28 @@ class _CubeScreenState extends State<CubeScreen> {
               children: [
                 ElevatedButton(
                   onPressed: rotateTopCounterClockwise,
-                  child: const Text("Rotate left"),
+                  child: const Text("Rotate top row left"),
                 ),
-                const SizedBox(width: 20),
+                const SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: rotateTopClockwise,
-                  child: const Text("Rotate right"),
+                  child: const Text("Rotate top row right"),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            //Buttons for rotation
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: rotateBottomCounterClockwise,
+                  child: const Text("Rotate bottom row left"),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: rotateBottomClockwise,
+                  child: const Text("Rotate bottom row right"),
                 ),
               ],
             )
