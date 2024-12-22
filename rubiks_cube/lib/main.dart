@@ -47,7 +47,7 @@ class CubeState {
     faces[2] = [faces[1][2], faces[1][3], ...faces[2].sublist(2)];
     faces[3] = [faces[2][2], faces[2][3], ...faces[3].sublist(2)];
   }
-  
+
   // Rotate top face to the left, modify if necessary
   void rotateBottom() {
     //Need to implement your code here
@@ -87,7 +87,11 @@ class _CubeScreenState extends State<CubeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('2x2 Rubik\'s Cube'),
+        backgroundColor: Colors.black,
+        title: const Text(
+          '2x2 Rubik\'s Cube',
+          style: TextStyle(color: Colors.white),
+        ),
         // instead of using an icon button here, create atleast 2 buttons to rotate the faces, rotate left face, or rotate right face, or implement all rotations.
         actions: [
           IconButton(
@@ -96,6 +100,7 @@ class _CubeScreenState extends State<CubeScreen> {
           )
         ],
       ),
+      backgroundColor: Colors.blueGrey,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -126,10 +131,15 @@ class _CubeScreenState extends State<CubeScreen> {
                   ],
                 ),
                 // Front face
-                SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: buildFace(cube.faces[0]),
+                Column(
+                  children: [
+                    const Text("Front"),
+                    SizedBox(
+                      height: 100,
+                      width: 100,
+                      child: buildFace(cube.faces[0]),
+                    ),
+                  ],
                 ),
                 // Right face
                 Column(
@@ -142,16 +152,33 @@ class _CubeScreenState extends State<CubeScreen> {
                     ),
                   ],
                 ),
+                // Rear face, implement your rear face
+                Column(
+                  children: [
+                    const Text("Rear"),
+                    SizedBox(
+                      height: 100,
+                      width: 100,
+                      child: buildFace(cube.faces[3]),
+                    ),
+                  ],
+                )
               ],
             ),
             // Bottom face , implement your bottom face
-            // Rear face, implement your rear face
+            Column(
+              children: [
+                const Text('Bottom'),
+                SizedBox(
+                  height: 100,
+                  width: 100,
+                  child: buildFace(cube.faces[5]),
                 ),
               ],
             ),
           ],
         ),
       ),
-    )
+    );
   }
 }
