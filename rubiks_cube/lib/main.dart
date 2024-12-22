@@ -188,6 +188,7 @@ class _CubeScreenState extends State<CubeScreen> {
           '2x2 Rubik\'s Cube',
           style: TextStyle(color: Colors.white),
         ),
+        centerTitle: true,
       ),
       backgroundColor: Colors.blueGrey,
       body: Center(
@@ -265,19 +266,33 @@ class _CubeScreenState extends State<CubeScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             //Buttons for rotation
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: rotateTopCounterClockwise,
-                  child: const Text("Rotate top row left"),
+                SizedBox(
+                  width: 150,
+                  height: 45,
+                  child: ElevatedButton(
+                    onPressed: rotateTopCounterClockwise,
+                    child: const Text(
+                      "Rotate top\nrow left",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ),
-                const SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: rotateTopClockwise,
-                  child: const Text("Rotate top row right"),
+                const SizedBox(width: 25),
+                SizedBox(
+                  width: 150,
+                  height: 45,
+                  child: ElevatedButton(
+                    onPressed: rotateTopClockwise,
+                    child: const Text(
+                      "Rotate top\nrow right",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -286,14 +301,28 @@ class _CubeScreenState extends State<CubeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: rotateBottomCounterClockwise,
-                  child: const Text("Rotate bottom row left"),
+                SizedBox(
+                  width: 150,
+                  height: 45,
+                  child: ElevatedButton(
+                    onPressed: rotateBottomCounterClockwise,
+                    child: const Text(
+                      "Rotate bottom\nrow left",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ),
-                const SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: rotateBottomClockwise,
-                  child: const Text("Rotate bottom row right"),
+                const SizedBox(width: 25),
+                SizedBox(
+                  width: 150,
+                  height: 45,
+                  child: ElevatedButton(
+                    onPressed: rotateBottomClockwise,
+                    child: const Text(
+                      "Rotate bottom\nrow right",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ),
               ],
             )
