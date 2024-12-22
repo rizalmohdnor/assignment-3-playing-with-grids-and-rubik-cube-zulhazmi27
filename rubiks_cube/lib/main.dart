@@ -130,6 +130,56 @@ class CubeState {
     faces[3][2] = bottomRowLeft[0];
     faces[3][3] = bottomRowLeft[1];
   }
+
+  void rotateLeftColForward() {
+    // Rotate the bottom face
+    List<Color> tempLeft = [...faces[1]];
+    faces[1] = [tempLeft[2], tempLeft[0], tempLeft[3], tempLeft[1]];
+
+    // Update the bottom row of adjacent faces
+    List<Color> leftColTop = [faces[4][0], faces[4][2]];
+    List<Color> leftColFront = [faces[0][0], faces[0][2]];
+    List<Color> leftColBottom = [faces[5][0], faces[5][2]];
+    List<Color> leftColBack = [faces[3][3], faces[3][1]];
+
+    // Perform the row swaps in clockwise order
+    faces[0][0] = leftColTop[0];
+    faces[0][2] = leftColTop[1];
+
+    faces[5][0] = leftColFront[0];
+    faces[5][2] = leftColFront[1];
+
+    faces[3][3] = leftColBottom[0];
+    faces[3][1] = leftColBottom[1];
+
+    faces[4][0] = leftColBack[0];
+    faces[4][2] = leftColBack[1];
+  }
+
+  void rotateLeftColBackward() {
+    // Rotate the bottom face
+    List<Color> tempLeft = [...faces[1]];
+    faces[1] = [tempLeft[2], tempLeft[0], tempLeft[3], tempLeft[1]];
+
+    // Update the bottom row of adjacent faces
+    List<Color> leftColTop = [faces[4][0], faces[4][2]];
+    List<Color> leftColFront = [faces[0][0], faces[0][2]];
+    List<Color> leftColBottom = [faces[5][0], faces[5][2]];
+    List<Color> leftColBack = [faces[3][3], faces[3][1]];
+
+    // Perform the row swaps in clockwise order
+    faces[0][0] = leftColBottom[0];
+    faces[0][2] = leftColBottom[1];
+
+    faces[5][0] = leftColBack[0];
+    faces[5][2] = leftColBack[1];
+
+    faces[3][3] = leftColTop[0];
+    faces[3][1] = leftColTop[1];
+
+    faces[4][0] = leftColFront[0];
+    faces[4][2] = leftColFront[1];
+  }
 }
 
 class CubeScreen extends StatefulWidget {
@@ -163,6 +213,18 @@ class _CubeScreenState extends State<CubeScreen> {
   void rotateBottomCounterClockwise() {
     setState(() {
       cube.rotateBottomCounterClockwise();
+    });
+  }
+
+  void rotateLeftColForward() {
+    setState(() {
+      cube.rotateLeftColForward();
+    });
+  }
+
+  void rotateLeftColBackward() {
+    setState(() {
+      cube.rotateLeftColBackward();
     });
   }
 
@@ -325,7 +387,36 @@ class _CubeScreenState extends State<CubeScreen> {
                   ),
                 ),
               ],
-            )
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 150,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: rotateLeftColForward,
+                    child: const Text(
+                      "Rotate left\ncol forward",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 25),
+                SizedBox(
+                  width: 150,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: rotateLeftColBackward,
+                    child: const Text(
+                      "Rotate left\ncol backward",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
