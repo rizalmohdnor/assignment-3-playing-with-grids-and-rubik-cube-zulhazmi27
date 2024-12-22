@@ -29,7 +29,6 @@ class CubeState {
     [Colors.white, Colors.white, Colors.white, Colors.white], // Bottom
   ];
 
-  // Rotate top face to the left, modify if necessary
   void rotateTopClockwise() {
     // Rotate the top face
     List<Color> tempTop = [...faces[4]];
@@ -80,7 +79,6 @@ class CubeState {
     faces[3][1] = topRowLeft[1];
   }
 
-  // Rotate top face to the left, modify if necessary
   void rotateBottomClockwise() {
     // Rotate the bottom face
     List<Color> tempBottom = [...faces[5]];
@@ -109,7 +107,7 @@ class CubeState {
   void rotateBottomCounterClockwise() {
     // Rotate the bottom face
     List<Color> tempBottom = [...faces[5]];
-    faces[5] = [tempBottom[2], tempBottom[0], tempBottom[3], tempBottom[1]];
+    faces[5] = [tempBottom[1], tempBottom[3], tempBottom[0], tempBottom[2]];
 
     // Update the bottom row of adjacent faces
     List<Color> bottomRowFront = [faces[0][2], faces[0][3]];
@@ -159,7 +157,7 @@ class CubeState {
   void rotateLeftColBackward() {
     // Rotate the left face
     List<Color> tempLeft = [...faces[1]];
-    faces[1] = [tempLeft[2], tempLeft[0], tempLeft[3], tempLeft[1]];
+    faces[1] = [tempLeft[1], tempLeft[3], tempLeft[0], tempLeft[2]];
 
     // Update the left col of adjacent faces
     List<Color> leftColTop = [faces[4][0], faces[4][2]];
@@ -209,7 +207,7 @@ class CubeState {
   void rotateRightColBackward() {
     // Rotate the right face
     List<Color> tempRight = [...faces[2]];
-    faces[2] = [tempRight[2], tempRight[0], tempRight[3], tempRight[1]];
+    faces[2] = [tempRight[1], tempRight[3], tempRight[0], tempRight[2]];
 
     // Update the right col of adjacent faces
     List<Color> rightColTop = [faces[4][1], faces[4][3]];
@@ -229,6 +227,106 @@ class CubeState {
 
     faces[4][1] = rightColFront[0];
     faces[4][3] = rightColFront[1];
+  }
+
+  void rotateFrontClockwise() {
+    // Rotate the front face
+    List<Color> tempFront = [...faces[0]];
+    faces[0] = [tempFront[2], tempFront[0], tempFront[3], tempFront[1]];
+
+    // Update the row and col of adjacent faces
+    List<Color> frontTop = [faces[4][2], faces[4][3]];
+    List<Color> frontLeft = [faces[1][3], faces[1][1]];
+    List<Color> frontRight = [faces[2][0], faces[2][2]];
+    List<Color> frontBottom = [faces[5][0], faces[5][1]];
+
+    // Perform the row and col swaps in clockwise order
+    faces[4][2] = frontLeft[0];
+    faces[4][3] = frontLeft[1];
+
+    faces[1][3] = frontBottom[0];
+    faces[1][1] = frontBottom[1];
+
+    faces[5][0] = frontRight[0];
+    faces[5][1] = frontRight[1];
+
+    faces[2][0] = frontTop[0];
+    faces[2][2] = frontTop[1];
+  }
+
+  void rotateFrontCounterClockwise() {
+    // Rotate the front face
+    List<Color> tempFront = [...faces[0]];
+    faces[0] = [tempFront[1], tempFront[3], tempFront[0], tempFront[2]];
+
+    // Update the row and col of adjacent faces
+    List<Color> frontTop = [faces[4][2], faces[4][3]];
+    List<Color> frontLeft = [faces[1][3], faces[1][1]];
+    List<Color> frontRight = [faces[2][0], faces[2][2]];
+    List<Color> frontBottom = [faces[5][0], faces[5][1]];
+
+    // Perform the row and col swaps in counter clockwise order
+    faces[4][2] = frontRight[0];
+    faces[4][3] = frontRight[1];
+
+    faces[1][3] = frontTop[0];
+    faces[1][1] = frontTop[1];
+
+    faces[5][0] = frontLeft[0];
+    faces[5][1] = frontLeft[1];
+
+    faces[2][0] = frontBottom[0];
+    faces[2][2] = frontBottom[1];
+  }
+
+  void rotateBackClockwise() {
+    // Rotate the back face
+    List<Color> tempBack = [...faces[3]];
+    faces[3] = [tempBack[2], tempBack[0], tempBack[3], tempBack[1]];
+
+    // Update the row and col of adjacent faces
+    List<Color> backTop = [faces[4][0], faces[4][1]];
+    List<Color> backLeft = [faces[1][2], faces[1][0]];
+    List<Color> backRight = [faces[2][1], faces[2][3]];
+    List<Color> backBottom = [faces[5][2], faces[5][3]];
+
+    // Perform the row and col swaps in clockwise order
+    faces[4][0] = backLeft[0];
+    faces[4][1] = backLeft[1];
+
+    faces[2][1] = backTop[0];
+    faces[2][3] = backTop[1];
+
+    faces[5][2] = backRight[0];
+    faces[5][3] = backRight[1];
+
+    faces[1][2] = backBottom[0];
+    faces[1][0] = backBottom[1];
+  }
+
+  void rotateBackCounterClockwise() {
+    // Rotate the back face
+    List<Color> tempBack = [...faces[3]];
+    faces[3] = [tempBack[1], tempBack[3], tempBack[0], tempBack[2]];
+
+    // Update the row and col of adjacent faces
+    List<Color> backTop = [faces[4][0], faces[4][1]];
+    List<Color> backLeft = [faces[1][2], faces[1][0]];
+    List<Color> backRight = [faces[2][1], faces[2][3]];
+    List<Color> backBottom = [faces[5][2], faces[5][3]];
+
+    // Perform the row and col swaps in clockwise order
+    faces[4][0] = backRight[0];
+    faces[4][1] = backRight[1];
+
+    faces[2][1] = backBottom[0];
+    faces[2][3] = backBottom[1];
+
+    faces[5][2] = backLeft[0];
+    faces[5][3] = backLeft[1];
+
+    faces[1][2] = backTop[0];
+    faces[1][0] = backTop[1];
   }
 }
 
@@ -290,6 +388,30 @@ class _CubeScreenState extends State<CubeScreen> {
     });
   }
 
+  void rotateFrontClockwise() {
+    setState(() {
+      cube.rotateFrontClockwise();
+    });
+  }
+
+  void rotateFrontCounterClockwise() {
+    setState(() {
+      cube.rotateFrontCounterClockwise();
+    });
+  }
+
+  void rotateBackClockwise() {
+    setState(() {
+      cube.rotateBackClockwise();
+    });
+  }
+
+  void rotateBackCounterClockwise() {
+    setState(() {
+      cube.rotateBackCounterClockwise();
+    });
+  }
+
   Widget buildFace(List<Color> faceColors) {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -344,6 +466,7 @@ class _CubeScreenState extends State<CubeScreen> {
                     ),
                   ],
                 ),
+                const SizedBox(width: 3),
                 // Front face
                 Column(
                   children: [
@@ -355,6 +478,7 @@ class _CubeScreenState extends State<CubeScreen> {
                     ),
                   ],
                 ),
+                const SizedBox(width: 3),
                 // Right face
                 Column(
                   children: [
@@ -366,6 +490,7 @@ class _CubeScreenState extends State<CubeScreen> {
                     ),
                   ],
                 ),
+                const SizedBox(width: 3),
                 // Rear face, implement your rear face
                 Column(
                   children: [
@@ -390,7 +515,7 @@ class _CubeScreenState extends State<CubeScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
             //Buttons for rotation
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -420,7 +545,7 @@ class _CubeScreenState extends State<CubeScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             //Buttons for rotation
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -450,7 +575,7 @@ class _CubeScreenState extends State<CubeScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -479,7 +604,7 @@ class _CubeScreenState extends State<CubeScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -502,6 +627,64 @@ class _CubeScreenState extends State<CubeScreen> {
                     onPressed: rotateRightColBackward,
                     child: const Text(
                       "Rotate right\ncol backward",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 150,
+                  height: 45,
+                  child: ElevatedButton(
+                    onPressed: rotateFrontCounterClockwise,
+                    child: const Text(
+                      "Rotate front\nface left",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 25),
+                SizedBox(
+                  width: 150,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: rotateFrontClockwise,
+                    child: const Text(
+                      "Rotate front\nface right",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 150,
+                  height: 45,
+                  child: ElevatedButton(
+                    onPressed: rotateBackCounterClockwise,
+                    child: const Text(
+                      "Rotate back\nface left",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 25),
+                SizedBox(
+                  width: 150,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: rotateBackClockwise,
+                    child: const Text(
+                      "Rotate back\nface right",
                       textAlign: TextAlign.center,
                     ),
                   ),
